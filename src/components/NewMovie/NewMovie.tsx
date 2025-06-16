@@ -47,7 +47,15 @@ export const NewMovie = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (hasError) {
+    if (hasError || !requiredFieldsFilled) {
+      setErrors(prev => ({
+        ...prev,
+        title: form.title.trim() === '' ? 'Поле обовязкове' : prev.title,
+        imgUrl: form.imgUrl.trim() === '' ? 'Поле обовязкове' : prev.imgUrl,
+        imdbUrl: form.imdbUrl.trim() === '' ? 'Поле обовязкове' : prev.imdbUrl,
+        imdbId: form.imdbId.trim() === '' ? 'Поле обовязкове' : prev.imdbId,
+      }));
+
       return;
     }
 
